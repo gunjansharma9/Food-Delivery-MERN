@@ -1,5 +1,7 @@
 import express from "express"
 import cors from "cors"
+import { connectDB } from "./config/db.js"
+import foodRouter from "./routes/foodRoute.js";
 
 // app config
 const app = express();
@@ -10,6 +12,10 @@ app.use(express.json());
 // to access backend from any frontend
 app.use(cors());
 
+// DB Connection
+connectDB();
+
+app.use("/api/food",foodRouter);
 
 app.get("/",(req,res) => {
     res.send("API Working");
